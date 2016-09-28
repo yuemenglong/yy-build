@@ -1,0 +1,38 @@
+{
+  "name": "yy-build",
+  "version": "1.0.0",
+  "description": "build tool for gulp and browserify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuemenglong/yy-build.git"
+  },
+  "keywords": [
+    "build",
+    "gulp",
+    "browserify"
+  ],
+  "author": "yuemenglong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yuemenglong/yy-build/issues"
+  },
+  "homepage": "https://github.com/yuemenglong/yy-build#readme",
+  "dependencies": {
+    "escodegen": "^1.8.1",
+    "esprima": "^3.0.0",
+    "estraverse": "^4.2.0",
+    "gulp-less": "^3.1.0",
+    "lodash": "^4.16.2",
+    "through2": "^2.0.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "watchify": "^3.7.0"
+  }
+}
