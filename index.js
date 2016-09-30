@@ -1,4 +1,5 @@
 var _ = require("lodash");
+var P = require("path");
 var through = require('through2');
 var stream = require("stream");
 var esprima = require("esprima");
@@ -16,6 +17,12 @@ var PathPlugin = require("./lib/path-plugin");
 var requirePattern = /^.*require\((['"]).+\1\).*$/gm;
 var pathPattern = /.*require\((['"])(.+)\1\).*/;
 var useStrictPattern = /^(['"])use strict\1.*/g
+
+var IGNORES = [];
+
+function ignore(igs) {
+    IGNORES = _.flatten([igs]);
+}
 
 function getRequirementNodes(ast) {
     var ret = [];
@@ -40,7 +47,20 @@ function getRequirementNodes(ast) {
 }
 
 function transform(file, content, plugins) {
-    var ast = esprima.parse(content, { sourceType: "module" });
+    if (IGNORES.indexOf(P.extname(file)) >= 0) {
+        return content;
+    }
+    try {
+        // var ast = esprima.parse(content, { sourceType: "module" });
+        var ast = esprima.parse(content);
+    } catch (ex) {
+        var info = `Parse [${file}] Fail`;
+        var line = _.times(info.length, _.constant("-")).join("");
+        console.log(`+${line}+`);
+        console.log(`|${info}|`);
+        console.log(`+${line}+`);
+        throw ex;
+    }
     var nodes = getRequirementNodes(ast);
     plugins.forEach(function(plugin) {
         var matches = nodes.filter(function(node) {
@@ -129,5 +149,7 @@ Build.ImgPlugin = ImgPlugin;
 Build.JadePlugin = JadePlugin;
 Build.LessPlugin = LessPlugin;
 Build.PathPlugin = PathPlugin;
+
+Build.ignore = ignore;
 
 module.exports = Build;
