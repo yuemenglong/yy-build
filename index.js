@@ -13,6 +13,7 @@ var ImgPlugin = require("./lib/img-plugin");
 var JadePlugin = require("./lib/jade-plugin");
 var LessPlugin = require("./lib/less-plugin");
 var PathPlugin = require("./lib/path-plugin");
+var WebReqrPlugin = require("./lib/web-reqr-plugin");
 
 var requirePattern = /^.*require\((['"]).+\1\).*$/gm;
 var pathPattern = /.*require\((['"])(.+)\1\).*/;
@@ -149,6 +150,7 @@ Build.ImgPlugin = ImgPlugin;
 Build.JadePlugin = JadePlugin;
 Build.LessPlugin = LessPlugin;
 Build.PathPlugin = PathPlugin;
+Build.WebReqrPlugin = WebReqrPlugin;
 
 Build.ignore = ignore;
 
